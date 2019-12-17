@@ -24,6 +24,15 @@ MicroBit
 - Bluetooth O wifi X(네트워크 측면)
 - 영국
 - c c++ JavaScript micropython tinyBasic
+
+
+makecode.org 
+--> 마이크로비트 코딩 시작 
+--> 새 프로젝트 (블록 코딩, javascript editor): 현재 browser 안에서 editing 하고 있음, 내 컴터에 프로그램 안깔아도 코딩할 수 있게
+
+
+microbit.org
+--> Let's code (python editor)
 ------------------------------------------------------------------------------------------------------------
 ESP32 
 - BLE O wifi O(네트워크 측면에서 좋음, OS가 없음 BareBoard)
