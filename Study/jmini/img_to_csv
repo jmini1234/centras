@@ -1,0 +1,20 @@
+import numpy as np
+import cv2 #!pip install cv2
+import os
+
+IMG_DIR = 'C:\csv_test'
+
+for img in os.listdir(IMG_DIR):
+        print(img)  #img name 
+        
+        img_array = cv2.imread(os.path.join(IMG_DIR,img), cv2.IMREAD_GRAYSCALE)
+
+        img_array = (img_array.flatten())
+
+        img_array  = img_array.reshape(-1, 1).T
+
+        print(img_array)  #pixel value
+
+        with open('output.csv', 'ab') as f:
+
+            np.savetxt(f, img_array, delimiter=",")
