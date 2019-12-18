@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import cv2
 import csv
-def rgb2gray(rgb):
-    return np.dot(rgb[...,:3], [0.299, 0.587, 0.114])
 
 img = cv2.imread('C:/Users/CSE_125-2/Desktop/images.jpg',cv2.COLOR_BGR2GRAY)     
 # pixels = np.array(img)
