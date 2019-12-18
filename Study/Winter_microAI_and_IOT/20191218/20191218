@@ -1,1 +1,57 @@
-...
+To play a tune, specify the note (C,D,E,F,G,A,B; including sharps (eg.: C#)) to play. Optionally, it’s possible to
+specify the octave (1-8) and the duration it will be played for:
+from microbit import *
+
+----------------------------------------------------------------------------------------------------------------------------
+
+import music
+# Play a 'C'
+music.play('C')
+# Play a 'C' for 4 beats long
+music.play('C:4')
+# Play a 'C' in octave number 3 for 4 beats long
+music.play('C3:4')
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Playing a series of notes one after the other is easy, you just put the notes you want to play in a list:
+from microbit import *
+import music
+# Tune: Frere Jacques
+tune = ["C4:4", "D4:4", "E4:4", "C4:4", "C4:4", "D4:4", "E4:4", "C4:4",
+"E4:4", "F4:4", "G4:8", "E4:4", "F4:4", "G4:8"]
+music.play(tune)
+
+----------------------------------------------------------------------------------------------------------------------------
+
+파이썬에서 모든 데이터는 리스트에 저장
+리스트를 선언할 때는 리스트에 저장되는 데이터의 갯수를 몰라도 가능
+리스트 안에 있는 데이터들은 index를 가짐
+대표적인 출력장치는 스피커와 모니터
+사운드는 주파수와 진폭으로 이루어짐
+떨림의 정도로 음계가 달라짐
+
+----------------------------------------------------------------------------------------------------------------------------
+
+#블루투스를 이용한 라디오 통신
+
+from microbit import *
+import radio
+radio.on()
+radio.config(channel=19) # Choose your own channel number
+radio.config(power=7) # Turn the signal up to full strength
+message_to_master = "Ash nazg durbatulûk, ash nazg gimbatul, ash nazg thrakatulûk,
+˓→agh burzum-ishi krimpatul."
+# Event loop.
+while True:
+radio.send(message_to_master)
+incoming = radio.receive()
+(continues on next page)
+36 Chapter 11. Radio
+UCL BBC micro:bit MicroPython Tutorial
+(continued from previous page)
+if incoming is not None:
+display.show(incoming)
+print(incoming)
+sleep(500)
+
