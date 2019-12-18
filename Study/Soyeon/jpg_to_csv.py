@@ -1,13 +1,18 @@
 import numpy as np
-import cv2 #pip install opencv-python
-import os
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import cv2
+import csv
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.299, 0.587, 0.114])
 
-img_array = cv2.imread('C:/Users/CSE_125-2/Desktop/images.jpg', cv2.IMREAD_GRAYSCALE)
-print(img_array)
-img_array = (img_array.flatten())
-img_array  = img_array.reshape(-1, 1).T
-print(img_array)
-with open('output.csv', 'ab') as f:
-    np.savetxt(f, img_array, delimiter=",")
-
-
+img = cv2.imread('C:/Users/CSE_125-2/Desktop/images.jpg',cv2.COLOR_BGR2GRAY)     
+# pixels = np.array(img)
+# plt.imshow(pixels)
+# plt.show()
+value = np.asarray(img, dtype=np.int)
+value = value.flatten()
+#print(value.size) # 240*240*3
+with open("output.csv", 'a') as f:
+    writer = csv.writer(f)
+    writer.writerow(value)
