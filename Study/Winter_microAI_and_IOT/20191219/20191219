@@ -1,0 +1,45 @@
+## 2019-12-19 ESP32 microPython
+
+esp32 - bluetooth,wifi 모두 사용 가능 (중국산), 메모리가 크기 때문에 대형 프로그램 가능, 이전 버전 esp8266, dual core(cpu 2개)
+
+AI chip 발명, 연결하기 위해서는 wifi 필요 
+AIOT -> AI chip이 핵심
+
+arduino -> 8bit
+microbit, esp32 -> 32bit 
+risk5 -> 64bit
+
+[Thonny와 esp32 연결]
+
+1. Goto https://micropython.org/download/#esp32
+2. download GENERIC : esp32-idf3-20191219-v1.11-671-g0d82f5d8c.bin #micropython
+3. thonny script 폴더에 python image 넣음 -> flash 
+4. !pip install esptool
+5. x+window 장치관리자 들어가서 포트&디렉토리에 맞게
+   !esptool.py.exe --chip esp32 --port com3 --baud 460800 write_flash -z 0x1000 c:\Thonny\Scripts\esp32-idf3-20191219-v1.11-671-g0d82f5d8c.bin
+6. object를 instance화하면 instance 생성됨 
+7. Tool-Option-interpreter에서 보드에 맞게 바꿔주기 
+
+python 문법
+
+-swtich 대신 if/elif ...
+-array는 type이 같아야 함. list는 인자의 type이 달라도 됨
+
+class를 객체화 시키면 instance가 된다. instance를 실제로 사용하는 것
+class는 1개 instance는 여러개 가능 
+
+Memory(RAM)에 존재하는것이 instance(data&function)
+class 안에 self 인자 존재 
+
+object에서 중요한 개념 
+ - Inheritance(상속) : 다른 class에 있는 것을 사용  
+          super().__init__() //init 할때
+          만약 똑같은 함수(중복) 선언하면 자식 class에 있는 함수로 사용
+          class Triangle(Polygon):
+
+ - Polymorphism(다형성) : 함수의 이름이 같지만 instance가 달라서 앞에 인스턴스 선언 . 함수 ~ 
+ - method overriding : 상속 받은 class의 함수를 사용할 수 있음 (상속과 함께)
+ 
+ 사용빈도 
+ list->tuple->dictionary->set
+ 
