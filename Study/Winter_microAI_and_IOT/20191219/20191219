@@ -42,4 +42,20 @@ object에서 중요한 개념
  
  사용빈도 
  list->tuple->dictionary->set
+
+------------------------------------------------------------------------------------------------------------------
  
+ANN(Artificial Neural Network) 
+
+- EBP(Error Back Propagation) : error를 뒤로 propagate 해서 학습했음 
+   error란 ? 입력이 들어오면 해당 출력이 되어야하는데 (rule) 그 규칙을 지키지 못함
+      rule이란 ? if then else 
+   학습은 rule을 가지고 하는 것임, case based , 경우 진행 case based  
+   
+ epoch : 학습 반복 횟수
+ error를 0으로 만들 수 없음
+ 
+ step
+ sigmoid : 서서히 증가하는 함수 , s자 => f(x)= 1/(1+e-x)  
+ 가중치는 계수 (주어진 값에 weight를 곱함) 크면 신호 값이 더 많이 반영 된다. 
+ modeling - neural 세포가 서로 연결 되어 있는 모양 
