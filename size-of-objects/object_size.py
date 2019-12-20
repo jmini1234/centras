@@ -1,3 +1,4 @@
+# Learn more or give us feedback
 # USAGE
 # python object_size.py --image images/example_01.png --width 0.955
 # python object_size.py --image images/example_02.png --width 0.955
@@ -51,9 +52,9 @@ for c in cnts:
         continue
     
     ### 넓이가 충분히 크지 않으면 무시
-
     # compute the rotated bounding box of the contour
     orig = image.copy()
+    cv2.drawContours(orig,[c],0,(255,0,0),3)
     box = cv2.minAreaRect(c)
     box = cv2.cv.BoxPoints(box) if imutils.is_cv2() else cv2.boxPoints(box)
     box = np.array(box, dtype="int")
@@ -62,12 +63,12 @@ for c in cnts:
     # in top-left, top-right, bottom-right, and bottom-left
     # order, then draw the outline of the rotated bounding
     # box
-#     box = perspective.order_points(box)
-#     cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
+    box = perspective.order_points(box)
+    cv2.drawContours(orig, [box.astype("int")], -1, (0, 255, 0), 2)
 
     # loop over the original points and draw them
-#     for (x, y) in box:
-#         cv2.circle(orig, (int(x), int(y)), 5, (0, 0, 255), -1)
+    for (x, y) in box:
+        cv2.circle(orig, (int(x), int(y)), 5, (0, 0, 255), -1)
 
     # unpack the ordered bounding box, then compute the midpoint
     # between the top-left and top-right coordinates, followed by
