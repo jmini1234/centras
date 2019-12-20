@@ -47,7 +47,7 @@ pixelsPerMetric = None
 # loop over the contours individually
 for c in cnts:
     # if the contour is not sufficiently large, ignore it
-    if cv2.contourArea(c) < 300:
+    if cv2.contourArea(c) < 500:
         continue
     
     ### 넓이가 충분히 크지 않으면 무시
@@ -94,20 +94,21 @@ for c in cnts:
 #         (255, 0, 255), 2)
 
     # compute the Euclidean distance between the midpoints
-    dA = dist.euclidean((tltrX, tltrY), (blbrX, blbrY))
-    dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
+#     dA = dist.euclidean((tltrX, tltrY), (blbrX, blbrY))
+#     dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
 
     # if the pixels per metric has not been initialized, then
     # compute it as the ratio of pixels to supplied metric
     # (in this case, inches)
-    if pixelsPerMetric is None:
-        pixelsPerMetric = dB / args["width"]
-
-    # compute the size of the object
-    dimA = dA / pixelsPerMetric
-    dimB = dB / pixelsPerMetric
+#     if pixelsPerMetric is None:
+#         pixelsPerMetric = dB / args["width"]
+# 
+#     # compute the size of the object
+#     dimA = dA / pixelsPerMetric
+#     dimB = dB / pixelsPerMetric
     
-    ########################################
+    ######################################################
+    
     leftmost = tuple(c[c[:, :, 0].argmin()][0])
     rightmost = tuple(c[c[:, :, 0].argmax()][0])
     topmost = tuple(c[c[:, :, 1].argmin()][0])
@@ -122,17 +123,17 @@ for c in cnts:
     
     cv2.line(orig,(leftmost[0],leftmost[1]), (rightmost[0],rightmost[1]),(0,0,255),2)
     cv2.line(orig,(topmost[0],topmost[1]), (bottommost[0],bottommost[1]),(0,0,255),2)
-    
-    print("left_x",leftmost[0])
-    print("left_y",leftmost[1])
-    print("right_x",rightmost[0])
-    print("right_y",rightmost[1])
 
-#     cv2.line(orig, (leftmost[0], rightmost[0]), (leftmost[1], rightmost[1]),
-#          (0, 0, 255), 2)
-#     
-#     cv2.line(orig, (topmost[0]), bottommost[0]), (topmost[1], bottommost[1]),
-#          (0, 0, 255), 2)
+    # compute the Euclidean distance between the extreme poi
+    dA = dist.euclidean((leftmost[0],leftmost[1]), (rightmost[0],rightmost[1]))
+    dB = dist.euclidean((topmost[0],topmost[1]), (bottommost[0],bottommost[1]))
+
+    if pixelsPerMetric is None:
+        pixelsPerMetric = dB / args["width"]
+
+    # compute the size of the object
+    dimA = dA / pixelsPerMetric
+    dimB = dB / pixelsPerMetric
       
 #     cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)),
 #     (255, 0, 255), 2)
@@ -140,12 +141,12 @@ for c in cnts:
 #     (255, 0, 255), 2)
 
     # draw the object sizes on the image
-#     cv2.putText(orig, "{:.1f}in".format(dimA),
-#         (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX,
-#         0.65, (255, 255, 255), 2)
-#     cv2.putText(orig, "{:.1f}in".format(dimB),
-#         (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
-#         0.65, (255, 255, 255), 2)
+    cv2.putText(orig, "{:.1f}in".format(dimA),
+         (int(leftmost[0] - 15), int(leftmost[1] - 10)), cv2.FONT_HERSHEY_SIMPLEX,
+         0.65, (255, 255, 255), 2)
+    cv2.putText(orig, "{:.1f}in".format(dimB),
+         (int(bottommost[0] + 10), int(bottommost[1])), cv2.FONT_HERSHEY_SIMPLEX,
+         0.65, (255, 255, 255), 2)
 
     # show the output image
     cv2.imshow("Image", orig)
