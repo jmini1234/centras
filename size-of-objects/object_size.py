@@ -118,7 +118,16 @@ for c in cnts:
     cv2.circle(image, rightmost, 5, (0, 255, 0), -1)
     cv2.circle(image, topmost, 5, (255, 0, 0), -1)
     cv2.circle(image, bottommost, 5, (255, 255, 0), -1)
- 
+    
+    
+    cv2.line(orig,(leftmost[0],leftmost[1]), (rightmost[0],rightmost[1]),(0,0,255),2)
+    cv2.line(orig,(topmost[0],topmost[1]), (bottommost[0],bottommost[1]),(0,0,255),2)
+    
+    print("left_x",leftmost[0])
+    print("left_y",leftmost[1])
+    print("right_x",rightmost[0])
+    print("right_y",rightmost[1])
+
 #     cv2.line(orig, (leftmost[0], rightmost[0]), (leftmost[1], rightmost[1]),
 #          (0, 0, 255), 2)
 #     
