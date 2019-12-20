@@ -83,70 +83,37 @@ for c in cnts:
     (trbrX, trbrY) = midpoint(tr, br)
 
     # draw the midpoints on the image
-#     cv2.circle(orig, (int(tltrX), int(tltrY)), 5, (255, 0, 0), -1)
-#     cv2.circle(orig, (int(blbrX), int(blbrY)), 5, (255, 0, 0), -1)
-#     cv2.circle(orig, (int(tlblX), int(tlblY)), 5, (255, 0, 0), -1)
-#     cv2.circle(orig, (int(trbrX), int(trbrY)), 5, (255, 0, 0), -1)
+    cv2.circle(orig, (int(tltrX), int(tltrY)), 5, (255, 0, 0), -1)
+    cv2.circle(orig, (int(blbrX), int(blbrY)), 5, (255, 0, 0), -1)
+    cv2.circle(orig, (int(tlblX), int(tlblY)), 5, (255, 0, 0), -1)
+    cv2.circle(orig, (int(trbrX), int(trbrY)), 5, (255, 0, 0), -1)
 
     # draw lines between the midpoints
-#     cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)),
-#         (255, 0, 255), 2)
-#     cv2.line(orig, (int(tlblX), int(tlblY)), (int(trbrX), int(trbrY)),
-#         (255, 0, 255), 2)
-
+    cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)),
+         (255, 0, 255), 2)
+    cv2.line(orig, (int(tlblX), int(tlblY)), (int(trbrX), int(trbrY)),
+         (255, 0, 255), 2)
+     
     # compute the Euclidean distance between the midpoints
-#     dA = dist.euclidean((tltrX, tltrY), (blbrX, blbrY))
-#     dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
+    dA = dist.euclidean((tltrX, tltrY), (blbrX, blbrY))
+    dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
 
     # if the pixels per metric has not been initialized, then
     # compute it as the ratio of pixels to supplied metric
     # (in this case, inches)
-#     if pixelsPerMetric is None:
-#         pixelsPerMetric = dB / args["width"]
-# 
-#     # compute the size of the object
-#     dimA = dA / pixelsPerMetric
-#     dimB = dB / pixelsPerMetric
-    
-    ######################################################
-    
-    leftmost = tuple(c[c[:, :, 0].argmin()][0])
-    rightmost = tuple(c[c[:, :, 0].argmax()][0])
-    topmost = tuple(c[c[:, :, 1].argmin()][0])
-    bottommost = tuple(c[c[:, :, 1].argmax()][0])
-    
-    
-    cv2.circle(image, leftmost, 5, (0, 0, 255), -1)
-    cv2.circle(image, rightmost, 5, (0, 255, 0), -1)
-    cv2.circle(image, topmost, 5, (255, 0, 0), -1)
-    cv2.circle(image, bottommost, 5, (255, 255, 0), -1)
-    
-    
-    cv2.line(orig,(leftmost[0],leftmost[1]), (rightmost[0],rightmost[1]),(0,0,255),2)
-    cv2.line(orig,(topmost[0],topmost[1]), (bottommost[0],bottommost[1]),(0,0,255),2)
-
-    # compute the Euclidean distance between the extreme poi
-    dA = dist.euclidean((leftmost[0],leftmost[1]), (rightmost[0],rightmost[1]))
-    dB = dist.euclidean((topmost[0],topmost[1]), (bottommost[0],bottommost[1]))
-
     if pixelsPerMetric is None:
         pixelsPerMetric = dB / args["width"]
-
-    # compute the size of the object
+#
+#     # compute the size of the object
     dimA = dA / pixelsPerMetric
     dimB = dB / pixelsPerMetric
-      
-#     cv2.line(orig, (int(tltrX), int(tltrY)), (int(blbrX), int(blbrY)),
-#     (255, 0, 255), 2)
-#     cv2.line(orig, (int(tlblX), int(tlblY)), (int(trbrX), int(trbrY)),
-#     (255, 0, 255), 2)
 
     # draw the object sizes on the image
     cv2.putText(orig, "{:.1f}in".format(dimA),
-         (int(leftmost[0] - 15), int(leftmost[1] - 10)), cv2.FONT_HERSHEY_SIMPLEX,
+         (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX,
          0.65, (255, 255, 255), 2)
     cv2.putText(orig, "{:.1f}in".format(dimB),
-         (int(bottommost[0] + 10), int(bottommost[1])), cv2.FONT_HERSHEY_SIMPLEX,
+         (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
          0.65, (255, 255, 255), 2)
 
     # show the output image
