@@ -1,3 +1,16 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+import cv2
+import os
+
+filename='C:/Users/CSE_125-2/Desktop/output.csv'
+savepath='C:/Users/CSE_125-2/Desktop/test/'
+
+with open(filename) as f:
+    reader = csv.reader(f, delimiter=';')
+    
     isLabel=True
     fish_len=""
     savename=""
