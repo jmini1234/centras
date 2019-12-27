@@ -2,25 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 image_size = 240 # width and length
-no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
-image_pixels = image_size * image_size
+no_of_different_labels = 10 #  i.e. 0, 1, 2, 3, ..., 9
+image_pixels = image_size * image_size *3
 # data_path = "data/mnist/"
 # train_data = np.loadtxt(data_path + "mnist_train.csv", 
 #                         delimiter=",")
 # test_data = np.loadtxt(data_path + "mnist_test.csv", 
 #                        delimiter=",")
-data_path = "D:/Thonny/"
-train_data = np.genfromtxt(data_path + "mnist_train.csv", 
-                        delimiter=";")
-test_data = np.genfromtxt(data_path + "mnist_test.csv", 
-                       delimiter=";")
-#print(train_data[:10])
-#print(test_data[:10])
 
-#print(train_data.shape) # [label, images.......]
-#print(test_data.shape)  # [label, images.......]
+data_path = "./"
+train_data = np.loadtxt(data_path + "output.csv", 
+                        delimiter=",")
+test_data = np.loadtxt(data_path + "output.csv", 
+                       delimiter=",")
+print(train_data[:10])
+print(test_data[:10])
 
-#input()
+print(train_data.shape) # [label, images.......]
+print(test_data.shape)  # [label, images.......]
+
+##input()
 
 fac = 0.99 / 255
 # train_imgs = np.asfarray(train_data[:, 1:]) * fac + 0.01
@@ -29,16 +30,16 @@ fac = 0.99 / 255
 # train_labels = np.asfarray(train_data[:, :1])
 # test_labels = np.asfarray(test_data[:, :1])
 
-train_imgs = np.asfarray(train_data[:, 1:]) * fac + 0.01
-test_imgs = np.asfarray(test_data[:, 1:]) * fac + 0.01
+train_imgs = np.asfarray(train_data[:500, 1:]) * fac + 0.01
+test_imgs = np.asfarray(test_data[:500, 1:]) * fac + 0.01
 
-train_labels = np.asfarray(train_data[:, :1])
-test_labels = np.asfarray(test_data[:, :1])
+train_labels = np.asfarray(train_data[:500, :1])
+test_labels = np.asfarray(test_data[:500, :1])
 
-#print(train_imgs.shape)
-#print(test_imgs.shape)
-#print(train_labels.shape)
-#print(test_labels.shape)
+print(train_imgs.shape)
+print(test_imgs.shape)
+print(train_labels.shape)
+print(test_labels.shape)
 
 #input()
 
@@ -62,10 +63,10 @@ train_labels_one_hot[train_labels_one_hot==1] = 0.99
 test_labels_one_hot[test_labels_one_hot==0] = 0.01
 test_labels_one_hot[test_labels_one_hot==1] = 0.99
 
-for i in range(21):
-    img = train_imgs[i].reshape((240,240))
-    plt.imshow(img, cmap="Greys")
-    plt.show()
+# for i in range(10):
+#     img = train_imgs[i].reshape((240,240,3))
+#     #plt.imshow(img, cmap="Greys")
+#     #plt.show()
 
 #input()
 
@@ -99,7 +100,7 @@ image_size = 240 # width and length
 no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
 image_pixels = image_size * image_size
 
-#print(image_pixels,no_of_different_labels)
+print(image_pixels,no_of_different_labels)
 
 #input()
 
@@ -252,11 +253,11 @@ print("accruracy: test", corrects / ( corrects + wrongs))
 cm = ANN.confusion_matrix(train_imgs, train_labels)
 print(cm)
 
-for i in range(21):
+for i in range(10):
     print("digit: ", i, "precision: ", ANN.precision(i, cm), "recall: ", ANN.recall(i, cm))
 
 
-input()
+#input()
 
 print("Repeat learning process three times(epochs)")
 epochs = 3
@@ -279,7 +280,7 @@ for epoch in range(epochs):
     print("accruracy: test", corrects / ( corrects + wrongs))
 
 print("The end of repeat learning process three times(epochs)")
-input()
+#input()
 print("Modified version to include epochs parameter")
 
 import numpy as np
@@ -452,7 +453,7 @@ for i in range(epochs):
     
 
 print("The end of modified version to include epochs parameter")
-input()
+#input()
 
 import numpy as np
 
@@ -616,7 +617,7 @@ corrects, wrongs = ANN.evaluate(test_imgs, test_labels)
 print("accruracy: test", corrects / ( corrects + wrongs))
 
 print("The end of bias parameter included")
-input()
+#input()
 print(" Modified version of epochs and bias parameters")
 
 import numpy as np
@@ -805,7 +806,7 @@ for epoch in range(epochs):
     print("accruracy test: ", corrects / ( corrects + wrongs))
 
 print("The end of modified version of epochs and bias included")
-input()
+#input()
 print("Write test results for varing hidden nodes and learning rates")
 
 epochs = 3
@@ -844,7 +845,7 @@ with open("nist_tests.csv", "w") as fh_out:
 
 print()
 print("The end of optimzing results with various learning parameters")
-input()
+#input()
 
 import numpy as np
 from scipy.special import expit as activation_function
@@ -1000,7 +1001,7 @@ corrects, wrongs = ANN.evaluate(test_imgs, test_labels)
 print("accruracy: test", corrects / ( corrects + wrongs))
 
 
-input()
+#input()
 print("Networks with multiple hidden layers")
 
 import numpy as np
@@ -1167,7 +1168,7 @@ print("accruracy: test", corrects / ( corrects + wrongs))
 
 print("Networks with multiple hidden layers and Epochs")
 print("This is final codes for fully described artificial neural networks")
-input()
+#input()
 
 import numpy as np
 from scipy.special import expit as activation_function
@@ -1331,6 +1332,7 @@ corrects, wrongs = ANN.evaluate(train_imgs, train_labels)
 print("accruracy train: ", corrects / ( corrects + wrongs))
 corrects, wrongs = ANN.evaluate(test_imgs, test_labels)
 print("accruracy: test", corrects / ( corrects + wrongs))
+
 
 
 
