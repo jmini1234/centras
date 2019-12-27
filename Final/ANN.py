@@ -3,17 +3,17 @@ import matplotlib.pyplot as plt
 
 image_size = 240 # width and length
 no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
-image_pixels = image_size * image_size * 3
+image_pixels = image_size * image_size *3
 # data_path = "data/mnist/"
 # train_data = np.loadtxt(data_path + "mnist_train.csv", 
 #                         delimiter=",")
 # test_data = np.loadtxt(data_path + "mnist_test.csv", 
 #                        delimiter=",")
 
-data_path = "C:/Users/CSE124/Desktop/"
-train_data = np.loadtxt(data_path + "output.csv", 
+data_path = "./"
+train_data = np.loadtxt(data_path + "training.csv", 
                         delimiter=",")
-test_data = np.loadtxt(data_path + "output.csv", 
+test_data = np.loadtxt(data_path + "test.csv", 
                        delimiter=",")
 print(train_data[:10])
 print(test_data[:10])
@@ -98,7 +98,7 @@ test_labels_one_hot = data[5]
 
 image_size = 240 # width and length
 no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
-image_pixels = image_size * image_size *3
+image_pixels = image_size * image_size*3
 
 print(image_pixels,no_of_different_labels)
 
@@ -159,7 +159,7 @@ class NeuralNetwork:
         
         input_vector = np.array(input_vector, ndmin=2).T
         target_vector = np.array(target_vector, ndmin=2).T
-        print(self.wih, input_vector)
+        
         output_vector1 = np.dot(self.wih, 
                                 input_vector)
         output_hidden = activation_function(output_vector1)
@@ -204,7 +204,7 @@ class NeuralNetwork:
         return output_vector
             
     def confusion_matrix(self, data_array, labels):
-        cm = np.zeros((10, 10), int)
+        cm = np.zeros((30, 30), int)
         for i in range(len(data_array)):
             res = self.run(data_array[i])
             res_max = res.argmax()
@@ -234,7 +234,7 @@ class NeuralNetwork:
 
 
 ANN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                    no_of_out_nodes = 21, 
+                    no_of_out_nodes = 21,  ##########
                     no_of_hidden_nodes = 100,
                     learning_rate = 0.1)
     
@@ -253,7 +253,7 @@ print("accruracy: test", corrects / ( corrects + wrongs))
 cm = ANN.confusion_matrix(train_imgs, train_labels)
 print(cm)
 
-for i in range(21):
+for i in range(10):
     print("digit: ", i, "precision: ", ANN.precision(i, cm), "recall: ", ANN.recall(i, cm))
 
 
@@ -263,7 +263,7 @@ print("Repeat learning process three times(epochs)")
 epochs = 3
 
 NN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                   no_of_out_nodes = 21, 
+                   no_of_out_nodes = 21, ###########
                    no_of_hidden_nodes = 100,
                    learning_rate = 0.1)
 
@@ -423,7 +423,7 @@ class NeuralNetwork:
 epochs = 3
 
 ANN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                               no_of_out_nodes = 21, 
+                               no_of_out_nodes = 21, #################
                                no_of_hidden_nodes = 100,
                                learning_rate = 0.15)
     
@@ -600,7 +600,7 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
 ANN = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                    no_of_out_nodes=21, 
+                    no_of_out_nodes=21,  ############
                     no_of_hidden_nodes=200,
                     learning_rate=0.1,
                     bias=None)
@@ -785,7 +785,7 @@ class NeuralNetwork:
 epochs = 3
 
 network = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                        no_of_out_nodes=21, 
+                        no_of_out_nodes=21,   ################
                         no_of_hidden_nodes=100,
                         learning_rate=0.1,
                         bias=None)
@@ -816,7 +816,7 @@ with open("nist_tests.csv", "w") as fh_out:
         for learning_rate in [0.01, 0.05, 0.1, 0.2]:
             for bias in [None, 0.5]:
                 network = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                                       no_of_out_nodes=21, 
+                                       no_of_out_nodes=21,  ############
                                        no_of_hidden_nodes=hidden_nodes,
                                        learning_rate=learning_rate,
                                        bias=bias)
