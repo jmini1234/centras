@@ -234,7 +234,7 @@ class NeuralNetwork:
 
 
 ANN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                    no_of_out_nodes = 10, 
+                    no_of_out_nodes = 21, 
                     no_of_hidden_nodes = 100,
                     learning_rate = 0.1)
     
@@ -253,7 +253,7 @@ print("accruracy: test", corrects / ( corrects + wrongs))
 cm = ANN.confusion_matrix(train_imgs, train_labels)
 print(cm)
 
-for i in range(10):
+for i in range(21):
     print("digit: ", i, "precision: ", ANN.precision(i, cm), "recall: ", ANN.recall(i, cm))
 
 
@@ -263,7 +263,7 @@ print("Repeat learning process three times(epochs)")
 epochs = 3
 
 NN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                   no_of_out_nodes = 10, 
+                   no_of_out_nodes = 21, 
                    no_of_hidden_nodes = 100,
                    learning_rate = 0.1)
 
@@ -423,7 +423,7 @@ class NeuralNetwork:
 epochs = 3
 
 ANN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                               no_of_out_nodes = 10, 
+                               no_of_out_nodes = 21, 
                                no_of_hidden_nodes = 100,
                                learning_rate = 0.15)
     
@@ -600,7 +600,7 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
 ANN = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                    no_of_out_nodes=10, 
+                    no_of_out_nodes=21, 
                     no_of_hidden_nodes=200,
                     learning_rate=0.1,
                     bias=None)
@@ -785,7 +785,7 @@ class NeuralNetwork:
 epochs = 3
 
 network = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                        no_of_out_nodes=10, 
+                        no_of_out_nodes=21, 
                         no_of_hidden_nodes=100,
                         learning_rate=0.1,
                         bias=None)
@@ -816,7 +816,7 @@ with open("nist_tests.csv", "w") as fh_out:
         for learning_rate in [0.01, 0.05, 0.1, 0.2]:
             for bias in [None, 0.5]:
                 network = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                                       no_of_out_nodes=10, 
+                                       no_of_out_nodes=21, 
                                        no_of_hidden_nodes=hidden_nodes,
                                        learning_rate=learning_rate,
                                        bias=bias)
