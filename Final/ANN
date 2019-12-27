@@ -98,7 +98,7 @@ test_labels_one_hot = data[5]
 
 image_size = 240 # width and length
 no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
-image_pixels = image_size * image_size
+image_pixels = image_size * image_size *3
 
 print(image_pixels,no_of_different_labels)
 
@@ -159,7 +159,7 @@ class NeuralNetwork:
         
         input_vector = np.array(input_vector, ndmin=2).T
         target_vector = np.array(target_vector, ndmin=2).T
-        
+        print(self.wih, input_vector)
         output_vector1 = np.dot(self.wih, 
                                 input_vector)
         output_hidden = activation_function(output_vector1)
