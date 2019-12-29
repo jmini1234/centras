@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 image_size = 240 # width and length
-no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
+no_of_different_labels = 3 #  i.e. 0, 1, 2, 3, ..., 9
 image_pixels = image_size * image_size * 3
 # data_path = "data/mnist/"
 # train_data = np.loadtxt(data_path + "mnist_train.csv", 
@@ -45,9 +45,9 @@ print(test_labels.shape)
 
 import numpy as np
 
-lr = np.arange(21)
+lr = np.arange(3)
 
-for label in range(21):
+for label in range(3):
     one_hot = (lr==label).astype(np.int)
     print("label: ", label, " in one-hot representation: ", one_hot)
     
@@ -97,7 +97,7 @@ train_labels_one_hot = data[4]
 test_labels_one_hot = data[5]
 
 image_size = 240 # width and length
-no_of_different_labels = 21 #  i.e. 0, 1, 2, 3, ..., 9
+no_of_different_labels = 3 #  i.e. 0, 1, 2, 3, ..., 9
 image_pixels = image_size * image_size *3
 
 print(image_pixels,no_of_different_labels)
@@ -113,7 +113,7 @@ activation_function = sigmoid
 
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd, 
                      (upp - mean) / sd, 
                      loc=mean, 
@@ -234,7 +234,7 @@ class NeuralNetwork:
 
 
 ANN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                    no_of_out_nodes = 21, 
+                    no_of_out_nodes = 3, 
                     no_of_hidden_nodes = 100,
                     learning_rate = 0.1)
     
@@ -253,17 +253,17 @@ print("accruracy: test", corrects / ( corrects + wrongs))
 cm = ANN.confusion_matrix(train_imgs, train_labels)
 print(cm)
 
-for i in range(21):
+for i in range(3):
     print("digit: ", i, "precision: ", ANN.precision(i, cm), "recall: ", ANN.recall(i, cm))
 
 
 #input()
 
 print("Repeat learning process three times(epochs)")
-epochs = 3
+epochs = 10
 
 NN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                   no_of_out_nodes = 21, 
+                   no_of_out_nodes = 3, 
                    no_of_hidden_nodes = 100,
                    learning_rate = 0.1)
 
@@ -292,7 +292,7 @@ activation_function = sigmoid
 
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd, 
                      (upp - mean) / sd, 
                      loc=mean, 
@@ -420,10 +420,10 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
     
-epochs = 3
+epochs = 10
 
 ANN = NeuralNetwork(no_of_in_nodes = image_pixels, 
-                               no_of_out_nodes = 21, 
+                               no_of_out_nodes = 3, 
                                no_of_hidden_nodes = 100,
                                learning_rate = 0.15)
     
@@ -464,7 +464,7 @@ activation_function = sigmoid
 
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd, 
                      (upp - mean) / sd, 
                      loc=mean, 
@@ -600,7 +600,7 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
 ANN = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                    no_of_out_nodes=21, 
+                    no_of_out_nodes=3, 
                     no_of_hidden_nodes=200,
                     learning_rate=0.1,
                     bias=None)
@@ -629,7 +629,7 @@ activation_function = sigmoid
 
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd,
                      (upp - mean) / sd,
                      loc=mean,
@@ -782,10 +782,10 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
 
-epochs = 3
+epochs = 10
 
 network = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                        no_of_out_nodes=21, 
+                        no_of_out_nodes=3, 
                         no_of_hidden_nodes=100,
                         learning_rate=0.1,
                         bias=None)
@@ -809,14 +809,14 @@ print("The end of modified version of epochs and bias included")
 #input()
 print("Write test results for varing hidden nodes and learning rates")
 
-epochs = 3
+epochs = 10
 
 with open("nist_tests.csv", "w") as fh_out:  
     for hidden_nodes in [20, 50, 100, 120, 150]:
         for learning_rate in [0.01, 0.05, 0.1, 0.2]:
             for bias in [None, 0.5]:
                 network = NeuralNetwork(no_of_in_nodes=image_pixels, 
-                                       no_of_out_nodes=21, 
+                                       no_of_out_nodes=3, 
                                        no_of_hidden_nodes=hidden_nodes,
                                        learning_rate=learning_rate,
                                        bias=bias)
@@ -851,7 +851,7 @@ import numpy as np
 from scipy.special import expit as activation_function
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd, 
                      (upp - mean) / sd, 
                      loc=mean, 
@@ -987,7 +987,7 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
     
-ANN = NeuralNetwork(network_structure=[image_pixels, 50, 50, 21],
+ANN = NeuralNetwork(network_structure=[image_pixels, 50, 50, 3],
                                learning_rate=0.1,
                                bias=None)
     
@@ -1008,7 +1008,7 @@ import numpy as np
 from scipy.special import expit as activation_function
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd,
                      (upp - mean) / sd, 
                      loc=mean, 
@@ -1153,9 +1153,9 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
 
-epochs = 3
+epochs = 10
 
-ANN = NeuralNetwork(network_structure=[image_pixels, 80, 80, 21],
+ANN = NeuralNetwork(network_structure=[image_pixels, 80, 80, 3],
                                learning_rate=0.01,
                                bias=None)
     
@@ -1174,7 +1174,7 @@ import numpy as np
 from scipy.special import expit as activation_function
 from scipy.stats import truncnorm
 
-def truncated_normal(mean=0, sd=1, low=0, upp=21):
+def truncated_normal(mean=0, sd=1, low=0, upp=3):
     return truncnorm((low - mean) / sd,
                      (upp - mean) / sd, 
                      loc=mean, 
@@ -1319,9 +1319,9 @@ class NeuralNetwork:
                 wrongs += 1
         return corrects, wrongs
 
-epochs = 3
+epochs = 10
 
-ANN = NeuralNetwork(network_structure=[image_pixels, 80, 80, 21],
+ANN = NeuralNetwork(network_structure=[image_pixels, 80, 80, 3],
                                learning_rate=0.01,
                                bias=None)
     
