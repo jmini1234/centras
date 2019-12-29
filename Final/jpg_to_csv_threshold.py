@@ -5,7 +5,7 @@ import re # 파일 이름에서 크기와 거리 추출
 import matplotlib.pyplot as plt
 import csv
 
-IMG_DIR = 'C:/Users/CSE124/Desktop/training/'
+IMG_DIR = 'C:/Users/CSE124/Desktop/test/'
 
 for img in os.listdir(IMG_DIR):
         #print(img)
@@ -13,7 +13,12 @@ for img in os.listdir(IMG_DIR):
         result = p.findall(img)
         #print(result)
         supervised=list()
-        supervised.append(result[0][0])
+        if int(result[0][0])<13:
+            supervised.append(0)
+        elif int(result[0][0])<20:
+            supervised.append(1)
+        else:
+            supervised.append(2)
         #print(supervised)
         img_array = cv2.imread(os.path.join(IMG_DIR,img), cv2.COLOR_BGR2GRAY)
         #plt.imshow(pixels)
@@ -29,6 +34,6 @@ for img in os.listdir(IMG_DIR):
     
         supervised.extend(value)
         print(value)
-        with open('C:/Users/CSE124/Desktop/training.csv', 'a', encoding="UTF-8", newline='') as f:
+        with open('C:/Users/CSE124/Desktop/test.csv', 'a', encoding="UTF-8", newline='') as f:
             writer = csv.writer(f, delimiter=",", lineterminator='\n')
             writer.writerow(supervised)
