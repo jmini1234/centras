@@ -12,18 +12,17 @@ datagen = ImageDataGenerator(
         fill_mode='nearest')
 
 for img in os.listdir('./test/') :
+    prefix = os.path.splitext(img)[0]    
     img = load_img('./test/'+img)  # PIL 이미지
     x = img_to_array(img)  # (3, 150, 150) 크기의 NumPy 배열
     x = x.reshape((1,) + x.shape)  # (1, 3, 150, 150) 크기의 NumPy 배열
-
+    
+    i=1
     # 아래 .flow() 함수는 임의 변환된 이미지를 배치 단위로 생성해서
-    # 지정된 `preview/` 폴더에 저장합니다.
-    i = 0
+    # 지정된 `preview/` 폴더에 저장합니다i = 0
     for batch in datagen.flow(x, batch_size=1,
-                              save_to_dir='preview', save_prefix='30', save_format='jpg'):
+                              save_to_dir='preview', save_prefix=prefix, save_format='jpg'):
         i += 1
         if i > 20:
             break  # 이미지 20장을 생성하고 마칩니다
-        
-        
-    
+
