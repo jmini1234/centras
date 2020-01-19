@@ -30,11 +30,11 @@ fac = 0.99 / 255
 # train_labels = np.asfarray(train_data[:, :1])
 # test_labels = np.asfarray(test_data[:, :1])
 
-train_imgs = np.asfarray(train_data[:500, 1:]) * fac + 0.01
-test_imgs = np.asfarray(test_data[:500, 1:]) * fac + 0.01
+train_imgs = np.asfarray(train_data[:, 1:]) * fac + 0.01
+test_imgs = np.asfarray(test_data[:, 1:]) * fac + 0.01
 
-train_labels = np.asfarray(train_data[:500, :1])
-test_labels = np.asfarray(test_data[:500, :1])
+train_labels = np.asfarray(train_data[:, :1])
+test_labels = np.asfarray(test_data[:, :1])
 
 print(train_imgs.shape)
 print(test_imgs.shape)
