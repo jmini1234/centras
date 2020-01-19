@@ -204,7 +204,7 @@ class NeuralNetwork:
         return output_vector
             
     def confusion_matrix(self, data_array, labels):
-        cm = np.zeros((30, 30), int)
+        cm = np.zeros((3, 3), int)
         for i in range(len(data_array)):
             res = self.run(data_array[i])
             res_max = res.argmax()
