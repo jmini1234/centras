@@ -21,7 +21,7 @@ def midpoint(ptA, ptB):
 # construct the argument parse and parse the arguments
 
 # load the image, convert it to grayscale, and blur it slightly
-IMG_DIR='C:/Users/CSE_125-2/Desktop/'
+IMG_DIR='C:/Users/user/Desktop/images/'
 image = cv2.imread(os.path.join(IMG_DIR,'23 (2).jpg'))
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (7, 7), 0)
