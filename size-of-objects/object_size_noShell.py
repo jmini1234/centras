@@ -21,9 +21,15 @@ def midpoint(ptA, ptB):
 # construct the argument parse and parse the arguments
 
 # load the image, convert it to grayscale, and blur it slightly
-IMG_DIR='C:/Users/user/Desktop/images/'
-image = cv2.imread(os.path.join(IMG_DIR,'23 (2).jpg'))
+IMG_DIR='C:/Users/CSE124/Desktop/image'
+image = cv2.imread(os.path.join(IMG_DIR,'16.jpg'))
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+ret, thresh1 = cv2.threshold(gray,127,255, cv2.THRESH_BINARY)
+gray = thresh1
+
+#cv2.imshow("Image", gray)
+#cv2.waitKey(0)
+
 gray = cv2.GaussianBlur(gray, (7, 7), 0)
 
 # perform edge detection, then perform a dilation + erosion to
@@ -40,7 +46,7 @@ cnts = imutils.grab_contours(cnts)
 # sort the contours from left-to-right and initialize the
 # 'pixels per metric' calibration variable
 (cnts, _) = contours.sort_contours(cnts)
-pixelsPerMetric = 6.587673945720361
+pixelsPerMetric = None
 
 # loop over the contours individually
 for c in cnts:
