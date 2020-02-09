@@ -25,26 +25,27 @@ print(test_images.shape) #(460, 172800)
 print(train_labels.shape) #(1619, 3)
 print(test_labels.shape) #(460, 3)
 '''
-
+train_images=train_images.reshape(1619, 240, 240, 3)
+test_images=test_images.reshape(460, 240, 240, 3)
 
 #모델 구성
 model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(240, 240, 1619)),
-    keras.layers.Dense(32, activation='relu'),
+    keras.layers.Flatten(input_shape=(240, 240, 3)),
+    keras.layers.Dense(1619, activation='relu'),
     keras.layers.Dense(10, activation='softmax')
 ])
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 print(model.summary())
-''' 
+
 #모델 훈련
-model.fit(train_images, train_labels, epochs=5)
+model.fit(train_images, train_labels, epochs=5, batch_size=100)
 
 #정확도 평가
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 print('\n테스트 정확도:', test_acc)
-'''
+
 
 
 '''
