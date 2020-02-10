@@ -43,7 +43,7 @@ model = keras.Sequential([
 ])
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+              metrics=['acc'])
 print(model.summary())
 
 #모델 훈련
@@ -51,8 +51,8 @@ model.fit(
     x_train,
     y_train,
     batch_size=100,
-    epochs=5, 
-    callbacks=[ModelCheckpoint('my_model_weights.h5', save_best_only=True)],
+    epochs=20, 
+    callbacks=[ModelCheckpoint('my_model_weights.h5', monitor='val_loss', save_best_only=True)],
     validation_data=(x_test, y_test)
 )
 
