@@ -9,6 +9,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 
+from keras.callbacks import ModelCheckpoint
+from sklearn.model_selection import train_test_split
+
 with open("./pickled_mnist.pkl", "br") as fh:
     data = pickle.load(fh)
 
@@ -30,7 +33,7 @@ train_images=train_images.reshape(1619, 240, 240, 3)
 test_images=test_images.reshape(460, 240, 240, 3)
 
 #trainSet과 validationSet 나누기
-x_train, x_test, y_train, y_test = train_test_split(train_images, test_images, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(train_images, train_labels, test_size=0.2)
 
 #모델 구성
 model = keras.Sequential([
@@ -47,7 +50,7 @@ print(model.summary())
 model.fit(
     x_train,
     y_train,
-    batch_size=100
+    batch_size=100,
     epochs=5, 
     callbacks=[ModelCheckpoint('my_model_weights.h5', save_best_only=True)],
     validation_data=(x_test, y_test)
