@@ -25,8 +25,12 @@ print(test_images.shape) #(460, 172800)
 print(train_labels.shape) #(1619, 3)
 print(test_labels.shape) #(460, 3)
 '''
+
 train_images=train_images.reshape(1619, 240, 240, 3)
 test_images=test_images.reshape(460, 240, 240, 3)
+
+#trainSet과 validationSet 나누기
+x_train, x_test, y_train, y_test = train_test_split(train_images, test_images, test_size=0.2)
 
 #모델 구성
 model = keras.Sequential([
@@ -40,13 +44,21 @@ model.compile(optimizer='adam',
 print(model.summary())
 
 #모델 훈련
-model.fit(train_images, train_labels, epochs=5, batch_size=100)
+model.fit(
+    x_train,
+    y_train,
+    batch_size=100
+    epochs=5, 
+    callbacks=[ModelCheckpoint('my_model_weights.h5', save_best_only=True)],
+    validation_data=(x_test, y_test)
+)
+
+#모델 저장
+model.save('my_model_weights.h5')
 
 #정확도 평가
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 print('\n테스트 정확도:', test_acc)
-
-
 
 '''
 #테스트 완료 후 prediction code
