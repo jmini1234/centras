@@ -57,6 +57,11 @@ model.fit(
     validation_data=(x_test, y_test)
 )
 
+# store model_json
+with open('./my_nn_arch.json', 'w') as fout:
+    fout.write(model.to_json())
+model.save_weights('./my_nn_weights.h5', overwrite=True)
+
 #모델 저장
 model.save('my_model_weights.h5')
 
