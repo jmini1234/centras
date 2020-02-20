@@ -62,7 +62,7 @@ with open('./my_nn_arch.json', 'w') as fout:
     fout.write(model.to_json())
 model.save_weights('./my_nn_weights.h5', overwrite=True)
 
-#모델 저장
+#모델 저장 -- 이 부분 그냥 load하면 에러나고 tf.keras.load_model 해야 에러가 
 model.save('my_model_weights.h5')
 
 #정확도 평가
