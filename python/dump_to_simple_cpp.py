@@ -28,7 +28,7 @@ with open(args.output, 'w') as fout:
     fout.write('layers ' + str(len(model.layers)) + '\n')
 
     layers = []
-    for ind, l in enumerate(arch["config"]):
+    for ind, l in enumerate(arch["config"]["layers"]):
         if args.verbose:
             print(ind, l)
         fout.write('layer ' + str(ind) + ' ' + l['class_name'] + '\n')
