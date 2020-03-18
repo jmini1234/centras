@@ -42,7 +42,7 @@ x_train, x_test, y_train, y_test = train_test_split(train_images, train_labels, 
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(240, 240, 3)),
     keras.layers.Dense(1619, activation='relu'),
-    keras.layers.Dense(10, activation='softmax')
+    keras.layers.Dense(3, activation='softmax')
 ])
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
@@ -76,6 +76,12 @@ with open("./fish.dat", "w") as fin:
 # c++ output should be the same ;)
 print('Prediction on saved sample:')
 print(str(model.predict(x_train[:1])))
+
+print("=======================================================================================")
+print("model weights:")
+print(model.layers[2].get_weights())
+
+
 # on my pc I got:
 #[[ 0.03729606  0.00783805  0.06588034  0.21728528  0.01093729  0.34730983
 #   0.01350389  0.02174525  0.26624694  0.01195715]]
