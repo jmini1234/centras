@@ -13,9 +13,9 @@ for img in os.listdir(IMG_DIR):
         result = p.findall(img)
         #print(result)
         supervised=list()
-        if int(result[0][0])<13:
+        if int(result[0][0])<=13:
             supervised.append(0)
-        elif int(result[0][0])<20:
+        elif int(result[0][0])<=20:
             supervised.append(1)
         else:
             supervised.append(2)
@@ -30,7 +30,7 @@ for img in os.listdir(IMG_DIR):
             if value[i]<150:
                 value[i]=0
             else:
-                value[i]=255
+                value[i]=1
     
         supervised.extend(value)
         print(value)
