@@ -20,7 +20,7 @@
 #define Momentum  0.9
 #define InitialWeightMax  0.5
 #define Success  0.0004
-#define test_PatternCount 5
+#define test_PatternCount 21
 
 //training data: s,m,l °¢ 10°³
 //test data: s,m,l °¢ 7°³
