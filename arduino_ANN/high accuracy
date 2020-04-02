@@ -13,7 +13,7 @@
 
 
 #define PatternCount  30
-#define InputNodes  400
+#define InputNodes  800
 #define HiddenNodes  50
 #define OutputNodes  3 //1
 #define LearningRate  0.3
