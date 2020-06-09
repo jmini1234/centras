@@ -140,14 +140,19 @@ void loop()
              uint16_t mcu_y= tft.height(); //240
              uint16_t mcu_x= tft.width();
              uint16_t block_grey_16_8 = 0;
+             
              for(uint16_t i=0;i<mcu_y;i++){
                for(uint16_t j=0;j<mcu_x;j++){
                  uint16_t ewha=*(d_buffer+i*240+j);
                  
                  block_grey_16_8=(ewha>>11)*0.2126+((ewha&0x7c0)>>5)*0.7152+(ewha&0x1f)*0.0722;
                                                                     
-                 tft.drawPixel(i,j,(block_grey_16_8<<11)+(block_grey_16_8<<6)+(block_grey_16_8));
+                 tft.drawPixel(i,j,(block_grey_16_8<<11)+(block_grey_16_8<<5)+(block_grey_16_8));
 
+                 //uint8_t gray= block_grey_16_8;
+                 
+                 //grey_buffer[240*i+j]=block_grey_16_8;
+                 
                  uint8_t gray = *(grey_buffer+240*i+j);
                  gray= block_grey_16_8;
                  
@@ -155,23 +160,23 @@ void loop()
                     tft.drawPixel(i,j,0xC618);
                 else
                     tft.drawPixel(i,j,0x7BEF);
-                Serial.println(grey_pixel_value);
+                //Serial.println(grey_pixel_value);
                }
              }
 
-             for(uint16_t k=0;k<240;k+=40){
+             for(uint16_t k=0;k<240;k+=6){
                  for(uint16_t l=0;l<240;l+=40){
-               float sum=0;
+                   float sum=0;
                    for(uint16_t i=0;i<6;i++){
                      for(uint16_t j=0;j<6;j++){
-                          uint8_t val = *(grey_buffer+6*k*l*6+6*l+(i+240)*6*j);
-                         Serial.print(val);
-
-                          sum+=val;
+                          sum=sum+*(grey_buffer+(l+i)*240+(k+j));
+                   d_40_buffer[k/6+(l/6)*6]=sum/36;
+                   Serial.print(d_40_buffer[k/6+(l/6)*6]);
+                   
                       } 
                     }
-                    Serial.print(sum);
-                    Serial.print("\n");
+                    
+                    //Serial.print("\n");
                   }
 
 //                  *(d_40_buffer+40*i+j) = sum;
